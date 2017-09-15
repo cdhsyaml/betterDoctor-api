@@ -1,4 +1,4 @@
-export class Bike {
+export class BetterDoctor {
   constructor(zipCode){
     this.zipCode = zipCode;
   }

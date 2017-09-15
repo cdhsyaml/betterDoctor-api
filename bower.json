@@ -1,9 +1,8 @@
 {
-  "name": "friday-project",
-  "description": "-api",
+  "name": "BetterDoctor API-project",
+  "description": "BetterDoctor-api is an application  users may enter a medical issue (ie: “sore throat” etc.) into a form, submit it, and receive a list of doctors in your city (e.g. Portland)",
   "main": "gulpfile.js",
   "authors": [
-    "kate",
     "shyamal"
   ],
   "license": "ISC",

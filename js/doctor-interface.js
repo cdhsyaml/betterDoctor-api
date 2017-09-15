@@ -1,4 +1,6 @@
-import { Bike } from './../js/bike.js';
+import { BetterDoctor } from './../js/doctor.js';
+var apiKey = require('./../.env').apiKey;
+
 const moment = require('moment');
 
 $(document).ready(function() {
