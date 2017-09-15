@@ -1,30 +1,30 @@
-# Bike Index API Website JavaScript/Asynchrpny API week-two Project
+# Doctor Lookup API Website JavaScript/Asynchrony API week-two Project
 
-#### Bike Index API Application, September 08 2017
+#### Doctor Lookup API Application, September 15 2017
 
 #### By Shyamal Punekar
 
 ## Description
 
-_An application that determines a user’s age based on a planet’s solar years.._
+_An application where users may enter a medical issue into a form, submit it, and receive a list of doctors in your city (e.g. Portland).._
 
 ## Setup/Installation Requirements
-* test api with postman
+* Test api with postman
 * npm install gulp --save-dev
 * Run gulp build
 * open 'index.html' to launch the application
-* Use the application to see stolen bike details by providing zip code.
+* Use the application to see list of doctors in your city by entering medical issue in the form.
 
 ## Specifications
 
 | Behavior      | Input | Output |
 | ------------- | ------------- | ------------- |
-| The user shall be able to enter zip | 97005 | | |
-| The user shall be able get all bikes by location | mm-dd-yyyy format| | |
-| The user shall be able to see bikes by color, bikes by manufacturer, and other criteria|  |  |
+| The user shall be able to enter  medical issue to receive a list of doctors in the Portland area that fit the search query | sore throat | | |
+| A user should be able to to enter a name to receive a list of doctors in the Portland area that fit the search query | | | |
+| The query response includes any doctors, the following information should be included about each doctor: first name, last name, address, phone number, website and whether or not the doctor is accepting new patients |  |  |
 
 # Setup
-  https://github.com/shyamalpunekar/bike-api
+  https://github.com/shyamalpunekar/doctor-api
 
 # Support and contact details
 
