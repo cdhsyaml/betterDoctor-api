@@ -1,12 +1,13 @@
 export class BetterDoctor {
-  constructor(zipCode){
-    this.zipCode = zipCode;
+  constructor(lat, lon){
+    this.lat = lat;
+    this.lon = lon;
   }
 
-  getAll (bikeResults) {
-    let bikeArray = [];
-    bikeResults.bikes.forEach(function(bike){
-      bikeArray.push({
+  getAll (doctorResults) {
+    let doctorArray = [];
+    doctorResults.doctors.forEach(function(doctor){
+      doctorArray.push({
         "id": bike.id,
         "title": bike.title ,
         "serial": bike.serial,
@@ -18,7 +19,7 @@ export class BetterDoctor {
     return bikeArray;
   }
 
-  getBikes(displayResults){
+  getDoctors(displayResults){
     let filteredBikes;
     let results;
     let url= `https://bikeindex.org:443/api/v3/search?stolenness=stolen`;

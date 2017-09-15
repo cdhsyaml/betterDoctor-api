@@ -2,22 +2,26 @@
   <head>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="build/js/app.js"></script>
-    <title>Bikes</title>
+    <title>Doctors List</title>
   </head>
   <body>
     <div class="container">
-      <h1>Search by Zip</h1>
-      <form id="bikeSearch">
-        <label for="zip">Enter a zip code:</label>
-        <input id="zip" type="number">
-        <button class="btn-success" type="submit" id="zip">Get Bikes!</button>
+      <h1>Search by latitude and longitude</h1>
+      <form id="doctorSearch">
+        <label for="med-issue">Enter a medical issue</label>
+        <input id="med-issue" type="text">
+
+        <label for="inputName">Enter the name</label>
+        <input id="inputName" type="text">
+
+        <button class="btn-success" type="submit" id="zip">Get Doctors!</button>
     </form>
     <div></div>
-    <ul id="bikeDetails">
+    <ul id="doctorDetails">
 
     </ul>
 
-    <ul id="bike-list">
+    <ul id="doctor-list">
     </ul>
     </div>
   </body>
