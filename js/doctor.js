@@ -1,35 +1,36 @@
 export class BetterDoctor {
-  constructor(lat, lon){
-    this.lat = lat;
-    this.lon = lon;
+  constructor(medicalIssue, inputName){
+    this.medicalIssue = medicalIssue;
+    this.inputName = inputName;
   }
 
-  getAll (doctorResults) {
+  filterDoctorData (doctorResults) {
     let doctorArray = [];
     doctorResults.doctors.forEach(function(doctor){
       doctorArray.push({
-        "id": bike.id,
-        "title": bike.title ,
-        "serial": bike.serial,
-        "year": bike.year,
-        "date_stolen": bike.date_stolen ,
-        "stolen_location":bike.stolen_location
+        "firstName": doctor.firstName,
+        "lastName": doctor.lastName,
+        "address": doctor.address,
+        "phone": doctor.phone,
+        "website": doctor.website ,
+        "email": doctor.email,
+        "description": doctor.description
       });
     });
-    return bikeArray;
+    return doctorArray;
   }
 
   getDoctors(displayResults){
-    let filteredBikes;
+    let filteredDoctors;
     let results;
     let url= `https://bikeindex.org:443/api/v3/search?stolenness=stolen`;
     $.get(url).then((results) =>{
-      filteredBikes = this.getAll(results);
-      displayResults(filteredBikes);
+      filteredDoctors = this.filterDoctorData(results);
+      displayResults(filteredDoctors);
     })
     .fail ( () => {
       console.log("Oops something wrong!!!!");
-      filteredBikes =[];
+      filteredDoctors =[];
     });
   }
 }
