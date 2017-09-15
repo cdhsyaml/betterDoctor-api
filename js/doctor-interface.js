@@ -20,10 +20,10 @@ $(document).ready(function() {
     let inputMedicalIssue = $('#med-issue');
     $('#med-issue').val("");
 
-    let betterDoctor = new BetterDoctor(inputMedicalIssue, inputName);
-      doctor.getDoctors(displayOutput);
+    let betterDoctor = new BetterDoctor(inputName);
+      betterDoctor.getDoctors(displayOutput);
       $("#doctor-list").last().on('click', '.doctors',function(){
-      console.log(`doctor details ${doctor.title}`);
+      console.log(`doctor details ${doctor.description}`);
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
     });

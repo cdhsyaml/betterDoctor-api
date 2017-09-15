@@ -1,4 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+exports.apiKey = "4aac0a8c2cfc49f5ff9a9ada39850603";
+
+},{}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9,51 +12,54 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Bike = exports.Bike = function () {
-  function Bike(zipCode) {
-    _classCallCheck(this, Bike);
+var BetterDoctor = exports.BetterDoctor = function () {
+  function BetterDoctor(inputName) {
+    _classCallCheck(this, BetterDoctor);
 
-    this.zipCode = zipCode;
+    this.inputName = inputName;
   }
 
-  _createClass(Bike, [{
-    key: "getAll",
-    value: function getAll(bikeResults) {
-      var bikeArray = [];
-      bikeResults.bikes.forEach(function (bike) {
-        bikeArray.push({
-          "id": bike.id,
-          "title": bike.title,
-          "serial": bike.serial,
-          "year": bike.year,
-          "date_stolen": bike.date_stolen,
-          "stolen_location": bike.stolen_location
+  _createClass(BetterDoctor, [{
+    key: "filterDoctorData",
+    value: function filterDoctorData(doctorResults) {
+      var doctorArray = [];
+      doctorResults.doctors.forEach(function (doctor) {
+        doctorArray.push({
+          "uid": doctor.uid,
+          "firstName": doctor.firstName,
+          "lastName": doctor.lastName,
+          "title": doctor.title,
+          "visit_address": doctor.visit_address,
+          "phones": doctor.phone,
+          "website": doctor.website,
+          "email": doctor.email,
+          "description": doctor.description
         });
       });
-      return bikeArray;
+      return doctorArray;
     }
   }, {
-    key: "getBikes",
-    value: function getBikes(displayResults) {
+    key: "getDoctors",
+    value: function getDoctors(displayResults) {
       var _this = this;
 
-      var filteredBikes = void 0;
+      var filteredDoctors = void 0;
       var results = void 0;
-      var url = "https://bikeindex.org:443/api/v3/search?stolenness=stolen";
+      var url = "https://api.betterdoctor.com/2016-03-01/doctors";
       $.get(url).then(function (results) {
-        filteredBikes = _this.getAll(results);
-        displayResults(filteredBikes);
+        filteredDoctors = _this.filterDoctorData(results);
+        displayResults(filteredDoctors);
       }).fail(function () {
         console.log("Oops something wrong!!!!");
-        filteredBikes = [];
+        filteredDoctors = [];
       });
     }
   }]);
 
-  return Bike;
+  return BetterDoctor;
 }();
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4518,36 +4524,40 @@ return hooks;
 
 })));
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
-var _bike = require('./../js/bike.js');
+var _doctor = require('./../js/doctor.js');
+
+var apiKey = require('./../.env').apiKey;
 
 var moment = require('moment');
 
 $(document).ready(function () {
-  var displayOutput = function displayOutput(bikes) {
-    bikes.forEach(function (bike) {
-      console.log(bike);
-      var stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
-      //  $('#bikeDetails').append(`<li> <span class = "bikes"> ${bike.title} ${stolenDate} ${bike.serial} <span> </li>` )
-      $('#bike-list').append('<li> <span class="bikes"> ' + bike.title + ' ' + stolenDate + ' ' + bike.serial + ' </span> </li>');
+  var displayOutput = function displayOutput(doctors) {
+    doctors.forEach(function (doctor) {
+      console.log(doctor);
+      //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
+
+      $('#doctor-list').append('<li> <span class="doctors"> ' + doctor.title + ' ' + doctor.firstName + ' ' + doctor.lastName + ' </span> </li>');
     });
   };
 
-  $('#bikeSearch').submit(function (event) {
+  $('#doctorSearch').submit(function (event) {
     event.preventDefault();
-    var inputZip = $('zip').val();
-    $('#zip').val("");
+    var inputName = $('#inputName').val();
+    $('#inputName').val("");
+    var inputMedicalIssue = $('#med-issue');
+    $('#med-issue').val("");
 
-    var bike = new _bike.Bike(inputZip);
-    bike.getBikes(displayOutput);
-    $("#bike-list").last().on('click', '.bikes', function () {
-      console.log('Bike details ' + bike.title);
-      $(".show-bike").show();
-      $(".show-bike p").text("textone");
+    var betterDoctor = new _doctor.BetterDoctor(inputName);
+    betterDoctor.getDoctors(displayOutput);
+    $("#doctor-list").last().on('click', '.doctors', function () {
+      console.log('doctor details ' + doctor.description);
+      $(".show-doctor").show();
+      $(".show-doctor p").text("textone");
     });
   });
 });
 
-},{"./../js/bike.js":1,"moment":2}]},{},[3]);
+},{"./../.env":1,"./../js/doctor.js":2,"moment":3}]},{},[4]);

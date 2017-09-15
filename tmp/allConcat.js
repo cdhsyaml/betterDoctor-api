@@ -1,27 +1,31 @@
-import { Bike } from './../js/bike.js';
+import { BetterDoctor } from './../js/doctor.js';
+var apiKey = require('./../.env').apiKey;
+
 const moment = require('moment');
 
 $(document).ready(function() {
-  let displayOutput = function(bikes){
-    bikes.forEach(function(bike){
-      console.log(bike);
-      let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
-    //  $('#bikeDetails').append(`<li> <span class = "bikes"> ${bike.title} ${stolenDate} ${bike.serial} <span> </li>` )
-    $('#bike-list').append(`<li> <span class="bikes"> ${bike.title} ${stolenDate} ${bike.serial} </span> </li>`);
+  let displayOutput = function(doctors){
+    doctors.forEach(function(doctor){
+      console.log(doctor);
+    //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
+
+    $('#doctor-list').append(`<li> <span class="doctors"> ${doctor.title} ${doctor.firstName} ${doctor.lastName} </span> </li>`);
     });
   };
 
-  $('#bikeSearch').submit(function(event){
+  $('#doctorSearch').submit(function(event){
     event.preventDefault();
-    let inputZip = $('zip').val();
-    $('#zip').val("");
+    let inputName = $('#inputName').val();
+    $('#inputName').val("");
+    let inputMedicalIssue = $('#med-issue');
+    $('#med-issue').val("");
 
-    let bike = new Bike(inputZip);
-      bike.getBikes(displayOutput);
-      $("#bike-list").last().on('click', '.bikes',function(){
-      console.log(`Bike details ${bike.title}`);
-      $(".show-bike").show();
-      $(".show-bike p").text("textone");
+    let betterDoctor = new BetterDoctor(inputName);
+      betterDoctor.getDoctors(displayOutput);
+      $("#doctor-list").last().on('click', '.doctors',function(){
+      console.log(`doctor details ${doctor.description}`);
+      $(".show-doctor").show();
+      $(".show-doctor p").text("textone");
     });
   });
 });

@@ -1,6 +1,5 @@
 export class BetterDoctor {
-  constructor(medicalIssue, inputName){
-    this.medicalIssue = medicalIssue;
+  constructor(inputName){
     this.inputName = inputName;
   }
 
@@ -25,7 +24,7 @@ export class BetterDoctor {
   getDoctors(displayResults){
     let filteredDoctors;
     let results;
-    let url= `https://api.betterdoctor.com/2016-03-01`;
+    let url= `https://api.betterdoctor.com/2016-03-01/doctors`;
     $.get(url).then((results) =>{
       filteredDoctors = this.filterDoctorData(results);
       displayResults(filteredDoctors);
