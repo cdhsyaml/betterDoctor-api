@@ -8,10 +8,12 @@ export class BetterDoctor {
     let doctorArray = [];
     doctorResults.doctors.forEach(function(doctor){
       doctorArray.push({
+        "uid": doctor.uid,
         "firstName": doctor.firstName,
         "lastName": doctor.lastName,
-        "address": doctor.address,
-        "phone": doctor.phone,
+        "title": doctor.title,
+        "visit_address": doctor.visit_address,
+        "phones": doctor.phone,
         "website": doctor.website ,
         "email": doctor.email,
         "description": doctor.description
@@ -23,7 +25,7 @@ export class BetterDoctor {
   getDoctors(displayResults){
     let filteredDoctors;
     let results;
-    let url= `https://bikeindex.org:443/api/v3/search?stolenness=stolen`;
+    let url= `https://api.betterdoctor.com/2016-03-01`;
     $.get(url).then((results) =>{
       filteredDoctors = this.filterDoctorData(results);
       displayResults(filteredDoctors);
