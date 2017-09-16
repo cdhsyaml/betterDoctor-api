@@ -28,7 +28,7 @@ _An application where users may enter a medical issue into a form, submit it, an
 ![Display doctor list](https://github.com/shyamalpunekar/betterDoctor-api/blob/master/images/doctor-list.png)
 
 # Setup
-  https://github.com/shyamalpunekar/doctor-api
+  https://github.com/shyamalpunekar/betterDoctor-api
 
 # Support and contact details
 
