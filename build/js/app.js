@@ -12,18 +12,21 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var apiKey = require('./../.env').apiKey;
+
 var BetterDoctor = exports.BetterDoctor = function () {
   function BetterDoctor(inputName) {
     _classCallCheck(this, BetterDoctor);
 
     this.inputName = inputName;
+    this.getDoctors(this.inputName);
   }
 
   _createClass(BetterDoctor, [{
     key: "filterDoctorData",
     value: function filterDoctorData(doctorResults) {
       var doctorArray = [];
-      doctorResults.doctors.forEach(function (doctor) {
+      doctorResults.data.forEach(function (doctor) {
         doctorArray.push({
           "uid": doctor.uid,
           "firstName": doctor.firstName,
@@ -40,17 +43,18 @@ var BetterDoctor = exports.BetterDoctor = function () {
     }
   }, {
     key: "getDoctors",
-    value: function getDoctors(displayResults) {
+    value: function getDoctors(doctorName) {
       var _this = this;
 
       var filteredDoctors = void 0;
       var results = void 0;
-      var url = "https://api.betterdoctor.com/2016-03-01/doctors";
-      $.get(url).then(function (results) {
-        filteredDoctors = _this.filterDoctorData(results);
-        displayResults(filteredDoctors);
+
+      var url = "https://api.betterdoctor.com/2016-03-01/doctors?user_key=4aac0a8c2cfc49f5ff9a9ada39850603" + "&name=" + doctorName + "&limit=2";
+      $.get(url).then(function (data) {
+        filteredDoctors = _this.filterDoctorData(data);
+        //  displayResults(filteredDoctors);
       }).fail(function () {
-        console.log("Oops something wrong!!!!");
+        console.log("Oops something went wrong!!!!");
         filteredDoctors = [];
       });
     }
@@ -59,7 +63,7 @@ var BetterDoctor = exports.BetterDoctor = function () {
   return BetterDoctor;
 }();
 
-},{}],3:[function(require,module,exports){
+},{"./../.env":1}],3:[function(require,module,exports){
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4534,14 +4538,14 @@ var apiKey = require('./../.env').apiKey;
 var moment = require('moment');
 
 $(document).ready(function () {
-  var displayOutput = function displayOutput(doctors) {
-    doctors.forEach(function (doctor) {
-      console.log(doctor);
-      //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
-
-      $('#doctor-list').append('<li> <span class="doctors"> ' + doctor.title + ' ' + doctor.firstName + ' ' + doctor.lastName + ' </span> </li>');
-    });
-  };
+  // let displayOutput = function(doctors){
+  //   doctors.forEach(function(doctor){
+  //     console.log(doctor);
+  //   //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
+  //
+  //   $('#doctor-list').append(`<li> <span class="doctors"> ${doctor.title} ${doctor.firstName} ${doctor.lastName} </span> </li>`);
+  //   });
+  // };
 
   $('#doctorSearch').submit(function (event) {
     event.preventDefault();
@@ -4551,7 +4555,7 @@ $(document).ready(function () {
     $('#med-issue').val("");
 
     var betterDoctor = new _doctor.BetterDoctor(inputName);
-    betterDoctor.getDoctors(displayOutput);
+
     $("#doctor-list").last().on('click', '.doctors', function () {
       console.log('doctor details ' + doctor.description);
       $(".show-doctor").show();

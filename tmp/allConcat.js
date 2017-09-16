@@ -1,17 +1,19 @@
-import { BetterDoctor } from './../js/doctor.js';
 var apiKey = require('./../.env').apiKey;
+
+import { BetterDoctor } from './../js/doctor.js';
+
 
 const moment = require('moment');
 
 $(document).ready(function() {
-  let displayOutput = function(doctors){
-    doctors.forEach(function(doctor){
-      console.log(doctor);
-    //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
-
-    $('#doctor-list').append(`<li> <span class="doctors"> ${doctor.title} ${doctor.firstName} ${doctor.lastName} </span> </li>`);
-    });
-  };
+  // let displayOutput = function(doctors){
+  //   doctors.forEach(function(doctor){
+  //     console.log(doctor);
+  //   //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
+  //
+  //   $('#doctor-list').append(`<li> <span class="doctors"> ${doctor.title} ${doctor.firstName} ${doctor.lastName} </span> </li>`);
+  //   });
+  // };
 
   $('#doctorSearch').submit(function(event){
     event.preventDefault();
@@ -21,7 +23,7 @@ $(document).ready(function() {
     $('#med-issue').val("");
 
     let betterDoctor = new BetterDoctor(inputName);
-      betterDoctor.getDoctors(displayOutput);
+    
       $("#doctor-list").last().on('click', '.doctors',function(){
       console.log(`doctor details ${doctor.description}`);
       $(".show-doctor").show();
