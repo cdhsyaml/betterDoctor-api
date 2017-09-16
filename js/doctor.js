@@ -3,25 +3,28 @@ var apiKey = require('./../.env').apiKey;
 export class BetterDoctor {
   constructor(inputName){
     this.inputName = inputName;
-    this.getDoctors(this.inputName);
   }
-
-
 
   filterDoctorData (doctorResults) {
     let doctorArray = [];
+    let doctors = [];
     doctorResults.data.forEach(function(doctor){
-      doctorArray.push({
+
+      doctors.push({
         "uid": doctor.uid,
-        "firstName": doctor.firstName,
-        "lastName": doctor.lastName,
-        "title": doctor.title,
-        "visit_address": doctor.visit_address,
-        "phones": doctor.phone,
+        "first_name": doctor.profile.first_name,
+        "lastName": doctor.profile.last_name,
+        "title": doctor.profile.title,
+
+        
+// doctor.phones.forEach(phone){
+//         "phones": phone
+//       },
         "website": doctor.website ,
-        "email": doctor.email,
-        "description": doctor.description
+        "description": doctor.specialties[0].description
+
       });
+      doctorArray.push(doctor);
     });
     return doctorArray;
   }
@@ -29,11 +32,12 @@ export class BetterDoctor {
   getDoctors(doctorName){
     let filteredDoctors;
     let results;
-
-    let url= `https://api.betterdoctor.com/2016-03-01/doctors?user_key=4aac0a8c2cfc49f5ff9a9ada39850603` + "&name=" + doctorName + "&limit=2";
+    let url= `https://api.betterdoctor.com/2016-03-01/doctors?user_key=4aac0a8c2cfc49f5ff9a9ada39850603` + "&name=" + this.inputName + "&limit=10";
     $.get(url).then((data) =>{
         filteredDoctors = this.filterDoctorData(data);
-    //  displayResults(filteredDoctors);
+
+
+      doctorName(filteredDoctors);
     })
     .fail ( () => {
       console.log("Oops something went wrong!!!!");

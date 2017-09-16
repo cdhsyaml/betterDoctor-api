@@ -2,18 +2,33 @@ var apiKey = require('./../.env').apiKey;
 
 import { BetterDoctor } from './../js/doctor.js';
 
-
 const moment = require('moment');
 
 $(document).ready(function() {
-  // let displayOutput = function(doctors){
-  //   doctors.forEach(function(doctor){
-  //     console.log(doctor);
-  //   //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
-  //
-  //   $('#doctor-list').append(`<li> <span class="doctors"> ${doctor.title} ${doctor.firstName} ${doctor.lastName} </span> </li>`);
-  //   });
-  // };
+  let displayResults = function(doctors){
+      doctors.forEach(function(doctor){
+
+    $('#doctor-list').append(` <span class="doctors">
+    </br>
+    <b>Title:</b> ${doctor.profile.title} </br>
+    <b>First Name:</b> ${doctor.profile.first_name} </br>
+    <b>Last Name:</b> ${doctor.profile.last_name} </br>
+    <b>Description:</b> ${doctor.specialties[0].description}</br>`);
+
+  if(doctor.practices[0] !=null && doctor.practices[0].visit_address != null)
+  {
+  $('#doctor-list').append(`
+  <b>City:</b> ${doctor.practices[0].visit_address.city}</span> </br>
+  <b>State:</b> ${doctor.practices[0].visit_address.state}</span> </br>
+  <b>Zip:</b> ${doctor.practices[0].visit_address.zip}</span> </br></br>`);
+  }
+  else
+  {
+      $('#doctor-list').append(` <b>City:</b> <span class="doctors"> City is unavailable</span> </br></br> `);
+  }
+    });
+  };
+
 
   $('#doctorSearch').submit(function(event){
     event.preventDefault();
@@ -23,9 +38,10 @@ $(document).ready(function() {
     $('#med-issue').val("");
 
     let betterDoctor = new BetterDoctor(inputName);
-    
+      betterDoctor.getDoctors(displayResults);
+
       $("#doctor-list").last().on('click', '.doctors',function(){
-      console.log(`doctor details ${doctor.description}`);
+
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
     });

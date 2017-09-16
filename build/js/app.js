@@ -19,25 +19,29 @@ var BetterDoctor = exports.BetterDoctor = function () {
     _classCallCheck(this, BetterDoctor);
 
     this.inputName = inputName;
-    this.getDoctors(this.inputName);
   }
 
   _createClass(BetterDoctor, [{
     key: "filterDoctorData",
     value: function filterDoctorData(doctorResults) {
       var doctorArray = [];
+      var doctors = [];
       doctorResults.data.forEach(function (doctor) {
-        doctorArray.push({
+
+        doctors.push({
           "uid": doctor.uid,
-          "firstName": doctor.firstName,
-          "lastName": doctor.lastName,
-          "title": doctor.title,
-          "visit_address": doctor.visit_address,
-          "phones": doctor.phone,
+          "first_name": doctor.profile.first_name,
+          "lastName": doctor.profile.last_name,
+          "title": doctor.profile.title,
+
+          // doctor.phones.forEach(phone){
+          //         "phones": phone
+          //       },
           "website": doctor.website,
-          "email": doctor.email,
-          "description": doctor.description
+          "description": doctor.specialties[0].description
+
         });
+        doctorArray.push(doctor);
       });
       return doctorArray;
     }
@@ -48,11 +52,11 @@ var BetterDoctor = exports.BetterDoctor = function () {
 
       var filteredDoctors = void 0;
       var results = void 0;
-
-      var url = "https://api.betterdoctor.com/2016-03-01/doctors?user_key=4aac0a8c2cfc49f5ff9a9ada39850603" + "&name=" + doctorName + "&limit=2";
+      var url = "https://api.betterdoctor.com/2016-03-01/doctors?user_key=4aac0a8c2cfc49f5ff9a9ada39850603" + "&name=" + this.inputName + "&limit=10";
       $.get(url).then(function (data) {
         filteredDoctors = _this.filterDoctorData(data);
-        //  displayResults(filteredDoctors);
+
+        doctorName(filteredDoctors);
       }).fail(function () {
         console.log("Oops something went wrong!!!!");
         filteredDoctors = [];
@@ -4538,14 +4542,18 @@ var apiKey = require('./../.env').apiKey;
 var moment = require('moment');
 
 $(document).ready(function () {
-  // let displayOutput = function(doctors){
-  //   doctors.forEach(function(doctor){
-  //     console.log(doctor);
-  //   //  let stolenDate = moment(bike.date_stolen).format('MM-DD-YYYY');
-  //
-  //   $('#doctor-list').append(`<li> <span class="doctors"> ${doctor.title} ${doctor.firstName} ${doctor.lastName} </span> </li>`);
-  //   });
-  // };
+  var displayResults = function displayResults(doctors) {
+    doctors.forEach(function (doctor) {
+
+      $('#doctor-list').append(' <span class="doctors">\n    </br>\n    <b>Title:</b> ' + doctor.profile.title + ' </br>\n    <b>First Name:</b> ' + doctor.profile.first_name + ' </br>\n    <b>Last Name:</b> ' + doctor.profile.last_name + ' </br>\n    <b>Description:</b> ' + doctor.specialties[0].description + '</br>');
+
+      if (doctor.practices[0] != null && doctor.practices[0].visit_address != null) {
+        $('#doctor-list').append('\n  <b>City:</b> ' + doctor.practices[0].visit_address.city + '</span> </br>\n  <b>State:</b> ' + doctor.practices[0].visit_address.state + '</span> </br>\n  <b>Zip:</b> ' + doctor.practices[0].visit_address.zip + '</span> </br></br>');
+      } else {
+        $('#doctor-list').append(' <b>City:</b> <span class="doctors"> City is unavailable</span> </br></br> ');
+      }
+    });
+  };
 
   $('#doctorSearch').submit(function (event) {
     event.preventDefault();
@@ -4555,9 +4563,10 @@ $(document).ready(function () {
     $('#med-issue').val("");
 
     var betterDoctor = new _doctor.BetterDoctor(inputName);
+    betterDoctor.getDoctors(displayResults);
 
     $("#doctor-list").last().on('click', '.doctors', function () {
-      console.log('doctor details ' + doctor.description);
+
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
     });
