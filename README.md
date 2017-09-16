@@ -23,6 +23,10 @@ _An application where users may enter a medical issue into a form, submit it, an
 | A user should be able to to enter a name to receive a list of doctors in the Portland area that fit the search query | | | |
 | The query response includes any doctors, the following information should be included about each doctor: first name, last name, address, phone number, website and whether or not the doctor is accepting new patients |  |  |
 
+# Screenshots
+
+![Display doctor list](images/doctor-list.PNG)
+
 # Setup
   https://github.com/shyamalpunekar/doctor-api
 
