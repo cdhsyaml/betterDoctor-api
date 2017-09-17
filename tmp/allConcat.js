@@ -1,6 +1,5 @@
 var apiKey = require('./../.env').apiKey;
 
-
 import { BetterDoctor } from './../js/doctor.js';
 
 const moment = require('moment');
@@ -13,9 +12,20 @@ $(document).ready(function() {
     </br>
     <b>Title:</b> ${doctor.profile.title} </br>
     <b>First Name:</b> ${doctor.profile.first_name} </br>
-    <b>Last Name:</b> ${doctor.profile.last_name} </br>
-    <b>Description:</b> ${doctor.specialties[0].description}</br>`);
+    <b>Last Name:</b> ${doctor.profile.last_name} </br>`);
 
+    //display doctor visit_address
+      if(doctor.specialties[0] !=null && doctor.specialties[0].description != null)
+      {
+      $('#doctor-list').append(`
+        <b>Description:</b> ${doctor.specialties[0].description}</br>`)
+
+      }
+      else
+      {
+          $('#doctor-list').append(` <b>Description:</b> Description is unavailable`);
+      }
+//display doctor visit_address
   if(doctor.practices[0] !=null && doctor.practices[0].visit_address != null)
   {
   $('#doctor-list').append(`
@@ -27,7 +37,7 @@ $(document).ready(function() {
   {
       $('#doctor-list').append(` <b>City:</b> <span class="doctors"> City is unavailable</span></br>`);
   }
-// phones
+// display doctor phones
 
   if(doctor.practices[0] !=null && doctor.practices[0].phones != null)
   {
@@ -36,7 +46,7 @@ $(document).ready(function() {
       $('#doctor-list').append(`
       <b>Phone # ${phone.type} :</b> ${phone.number}</span> </br>`);
     })
-  
+
   }
   else
   {
@@ -46,12 +56,11 @@ $(document).ready(function() {
 
   }
 
+// display doctor website
   if(doctor.practices[0] != null)
   {
 let isWebSiteAvailable = false;
     doctor.practices.forEach(function(practice){
-
-
       if(practice.website != null )
       {
         $('#doctor-list').append(`
@@ -70,10 +79,6 @@ let isWebSiteAvailable = false;
 
     $('#doctor-list').append(`</br>`);
   }
-
-
-
-
     });
   };
 

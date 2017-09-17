@@ -33,9 +33,7 @@ var BetterDoctor = exports.BetterDoctor = function () {
           "first_name": doctor.profile.first_name,
           "lastName": doctor.profile.last_name,
           "title": doctor.profile.title,
-
-          "website": doctor.website,
-          "description": doctor.specialties[0].description
+          "website": doctor.website
 
         });
         doctorArray.push(doctor);
@@ -4542,14 +4540,21 @@ $(document).ready(function () {
   var displayResults = function displayResults(doctors) {
     doctors.forEach(function (doctor) {
 
-      $('#doctor-list').append(' <span class="doctors">\n    </br>\n    <b>Title:</b> ' + doctor.profile.title + ' </br>\n    <b>First Name:</b> ' + doctor.profile.first_name + ' </br>\n    <b>Last Name:</b> ' + doctor.profile.last_name + ' </br>\n    <b>Description:</b> ' + doctor.specialties[0].description + '</br>');
+      $('#doctor-list').append(' <span class="doctors">\n    </br>\n    <b>Title:</b> ' + doctor.profile.title + ' </br>\n    <b>First Name:</b> ' + doctor.profile.first_name + ' </br>\n    <b>Last Name:</b> ' + doctor.profile.last_name + ' </br>');
 
+      //display doctor visit_address
+      if (doctor.specialties[0] != null && doctor.specialties[0].description != null) {
+        $('#doctor-list').append('\n        <b>Description:</b> ' + doctor.specialties[0].description + '</br>');
+      } else {
+        $('#doctor-list').append(' <b>Description:</b> Description is unavailable');
+      }
+      //display doctor visit_address
       if (doctor.practices[0] != null && doctor.practices[0].visit_address != null) {
         $('#doctor-list').append('\n  <b>City:</b> ' + doctor.practices[0].visit_address.city + '</span> </br>\n  <b>State:</b> ' + doctor.practices[0].visit_address.state + '</span> </br>\n  <b>Zip:</b> ' + doctor.practices[0].visit_address.zip + '</span> </br>');
       } else {
         $('#doctor-list').append(' <b>City:</b> <span class="doctors"> City is unavailable</span></br>');
       }
-      // phones
+      // display doctor phones
 
       if (doctor.practices[0] != null && doctor.practices[0].phones != null) {
 
@@ -4561,10 +4566,10 @@ $(document).ready(function () {
         $('#doctor-list').append('\n      <b>Phone #:</b> Phone Number is unavailable</span>  </br>');
       }
 
+      // display doctor website
       if (doctor.practices[0] != null) {
         var isWebSiteAvailable = false;
         doctor.practices.forEach(function (practice) {
-
           if (practice.website != null) {
             $('#doctor-list').append('\n        <b>website :</b> ' + practice.website + '</span> </br>');
             isWebSiteAvailable = true;
