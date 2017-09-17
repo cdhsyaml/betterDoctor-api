@@ -1,5 +1,6 @@
 var apiKey = require('./../.env').apiKey;
 
+
 import { BetterDoctor } from './../js/doctor.js';
 
 const moment = require('moment');
@@ -20,12 +21,32 @@ $(document).ready(function() {
   $('#doctor-list').append(`
   <b>City:</b> ${doctor.practices[0].visit_address.city}</span> </br>
   <b>State:</b> ${doctor.practices[0].visit_address.state}</span> </br>
-  <b>Zip:</b> ${doctor.practices[0].visit_address.zip}</span> </br></br>`);
+  <b>Zip:</b> ${doctor.practices[0].visit_address.zip}</span> </br>`);
   }
   else
   {
-      $('#doctor-list').append(` <b>City:</b> <span class="doctors"> City is unavailable</span> </br></br> `);
+      $('#doctor-list').append(` <b>City:</b> <span class="doctors"> City is unavailable</span></br>`);
   }
+// phones
+
+  if(doctor.practices[0] !=null && doctor.practices[0].phones != null)
+  {
+
+    doctor.practices[0].phones.forEach(function(phone){
+      $('#doctor-list').append(`
+      <b>Phone # ${phone.type} :</b> ${phone.number}</span> </br>`);
+    })
+    $('#doctor-list').append(`</br>`);
+  }
+  else
+  {
+
+      $('#doctor-list').append(`
+      <b>Phone #:</b> Phone Number is unavailable</span>  </br></br>`);
+
+  }
+
+
     });
   };
 
