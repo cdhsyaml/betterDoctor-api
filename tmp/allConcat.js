@@ -36,15 +36,42 @@ $(document).ready(function() {
       $('#doctor-list').append(`
       <b>Phone # ${phone.type} :</b> ${phone.number}</span> </br>`);
     })
-    $('#doctor-list').append(`</br>`);
+  
   }
   else
   {
 
       $('#doctor-list').append(`
-      <b>Phone #:</b> Phone Number is unavailable</span>  </br></br>`);
+      <b>Phone #:</b> Phone Number is unavailable</span>  </br>`);
 
   }
+
+  if(doctor.practices[0] != null)
+  {
+let isWebSiteAvailable = false;
+    doctor.practices.forEach(function(practice){
+
+
+      if(practice.website != null )
+      {
+        $('#doctor-list').append(`
+        <b>website :</b> ${practice.website}</span> </br>`);
+        isWebSiteAvailable = true;
+      }
+
+    })
+    if(!isWebSiteAvailable)
+      {
+
+          $('#doctor-list').append(`
+          <b>website :</b> website is unavailable</span>  </br></br>`);
+
+      }
+
+    $('#doctor-list').append(`</br>`);
+  }
+
+
 
 
     });

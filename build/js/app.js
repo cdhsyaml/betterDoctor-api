@@ -4556,10 +4556,26 @@ $(document).ready(function () {
         doctor.practices[0].phones.forEach(function (phone) {
           $('#doctor-list').append('\n      <b>Phone # ' + phone.type + ' :</b> ' + phone.number + '</span> </br>');
         });
-        $('#doctor-list').append('</br>');
       } else {
 
-        $('#doctor-list').append('\n      <b>Phone #:</b> Phone Number is unavailable</span>  </br></br>');
+        $('#doctor-list').append('\n      <b>Phone #:</b> Phone Number is unavailable</span>  </br>');
+      }
+
+      if (doctor.practices[0] != null) {
+        var isWebSiteAvailable = false;
+        doctor.practices.forEach(function (practice) {
+
+          if (practice.website != null) {
+            $('#doctor-list').append('\n        <b>website :</b> ' + practice.website + '</span> </br>');
+            isWebSiteAvailable = true;
+          }
+        });
+        if (!isWebSiteAvailable) {
+
+          $('#doctor-list').append('\n          <b>website :</b> website is unavailable</span>  </br></br>');
+        }
+
+        $('#doctor-list').append('</br>');
       }
     });
   };
