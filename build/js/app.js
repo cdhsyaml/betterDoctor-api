@@ -34,7 +34,6 @@ var BetterDoctor = exports.BetterDoctor = function () {
           "lastName": doctor.profile.last_name,
           "title": doctor.profile.title,
           "website": doctor.website
-
         });
         doctorArray.push(doctor);
       });
@@ -50,7 +49,6 @@ var BetterDoctor = exports.BetterDoctor = function () {
       var url = "https://api.betterdoctor.com/2016-03-01/doctors?user_key=4aac0a8c2cfc49f5ff9a9ada39850603" + "&name=" + this.inputName + "&limit=20";
       $.get(url).then(function (data) {
         filteredDoctors = _this.filterDoctorData(data);
-
         doctorName(filteredDoctors);
       }).fail(function () {
         console.log("Oops something went wrong!!!!");
@@ -4540,9 +4538,9 @@ $(document).ready(function () {
   var displayResults = function displayResults(doctors) {
     doctors.forEach(function (doctor) {
 
-      $('#doctor-list').append(' <span class="doctors">\n    </br>\n    <b>Title:</b> ' + doctor.profile.title + ' </br>\n    <b>First Name:</b> ' + doctor.profile.first_name + ' </br>\n    <b>Last Name:</b> ' + doctor.profile.last_name + ' </br>');
+      $('#doctor-list').append(' <span class="doctors">\n        </br>\n        <b>Title:</b> ' + doctor.profile.title + ' </br>\n        <b>First Name:</b> ' + doctor.profile.first_name + ' </br>\n        <b>Last Name:</b> ' + doctor.profile.last_name + ' </br>');
 
-      //display doctor visit_address
+      //display doctor description
       if (doctor.specialties[0] != null && doctor.specialties[0].description != null) {
         $('#doctor-list').append('\n        <b>Description:</b> ' + doctor.specialties[0].description + '</br>');
       } else {
@@ -4550,7 +4548,7 @@ $(document).ready(function () {
       }
       //display doctor visit_address
       if (doctor.practices[0] != null && doctor.practices[0].visit_address != null) {
-        $('#doctor-list').append('\n  <b>City:</b> ' + doctor.practices[0].visit_address.city + '</span> </br>\n  <b>State:</b> ' + doctor.practices[0].visit_address.state + '</span> </br>\n  <b>Zip:</b> ' + doctor.practices[0].visit_address.zip + '</span> </br>');
+        $('#doctor-list').append('\n          <b>City:</b> ' + doctor.practices[0].visit_address.city + '</span> </br>\n          <b>State:</b> ' + doctor.practices[0].visit_address.state + '</span> </br>\n          <b>Zip:</b> ' + doctor.practices[0].visit_address.zip + '</span> </br>');
       } else {
         $('#doctor-list').append(' <b>City:</b> <span class="doctors"> City is unavailable</span></br>');
       }
@@ -4576,10 +4574,8 @@ $(document).ready(function () {
           }
         });
         if (!isWebSiteAvailable) {
-
           $('#doctor-list').append('\n          <b>website :</b> website is unavailable</span>  </br></br>');
         }
-
         $('#doctor-list').append('</br>');
       }
     });
@@ -4591,12 +4587,9 @@ $(document).ready(function () {
     $('#inputName').val("");
     var inputMedicalIssue = $('#med-issue');
     $('#med-issue').val("");
-
     var betterDoctor = new _doctor.BetterDoctor(inputName);
     betterDoctor.getDoctors(displayResults);
-
     $("#doctor-list").last().on('click', '.doctors', function () {
-
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
     });

@@ -1,24 +1,24 @@
-body{
-background: url('../images/doctor.jpg');
-background-size: cover;
-font-family: 'Open Sans', sans-serif;
-color: black;
+body {
+  background: url('../images/doctor.jpg');
+  background-size: cover;
+  font-family: 'Open Sans', sans-serif;
+  color: #2b7cbc;
 }
 
 h1 {
-    margin: auto;
-    color: #2b7cbc;
+  margin: auto;
+  color: #2b7cbc;
 }
 
-label{
+label {
   cursor: pointer;
   color: : #2b7cbc;
 }
 
 .findButton {
-    background: #2b7cbc;
-    color: white;
-    font-weight: bold;
+  background: #2b7cbc;
+  color: white;
+  font-weight: bold;
 }
 
 label:after {
@@ -31,33 +31,31 @@ html {
 }
 
 .btn {
-    margin: 5px;
-    background: #c4e5ed;
-    color: #2b7cbc;
+  margin: 5px;
+  background: #c4e5ed;
+  color: #2b7cbc;
 }
 
 .well {
-    padding-top: 50px;
-    margin-left: 50px;
- }
-
-.panel-heading {
-
+  padding-top: 50px;
+  margin-left: 50px;
 }
 
+.panel-heading {}
+
 @media screen and (max-width: 768px) and (min-width: 600px) {
-	body {
-		background-color: black;
-		color: #2b7cbc;
-	}
+  body {
+    background-color: black;
+    color: #2b7cbc;
+  }
 }
 
 @media screen and (max-width:480px) {
-	body {
-		background-color: teal;
-	}
-	.centerTest {
-		width: 100%;
-		text-align: center;
-	}
+  body {
+    background-color: teal;
+  }
+  .centerTest {
+    width: 100%;
+    text-align: center;
+  }
 }
