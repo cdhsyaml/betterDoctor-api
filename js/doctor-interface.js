@@ -20,7 +20,7 @@ $(document).ready(function() {
       //display doctor description
       if (doctor.specialties[0] != null && doctor.specialties[0].description != null) {
         $('#doctor-list').append(`
-        <b>Description:</b> ${doctor.specialties[0].description}</br>`)
+        <b>Description:</b> ${doctor.specialties[0].description}</br>`);
 
       } else {
         $('#doctor-list').append(` <b>Description:</b> Description is unavailable`);
@@ -42,7 +42,6 @@ $(document).ready(function() {
         $('#doctor-list').append(` <b>Accepting New Patients:</b> No </span> </br>`);
       }
       // display doctor phones
-
       if (doctor.practices[0] != null && doctor.practices[0].phones != null) {
 
         doctor.practices[0].phones.forEach(function(phone) {
@@ -92,13 +91,14 @@ $(document).ready(function() {
 $('#specialty-list').click(function() {
 
   var id = $('#specialty-list li.selected').attr('id');
-  
+
   let betterDoctor = new BetterDoctor(null, null, id);
   betterDoctor.getDoctorsBySpecialties(displayResults);
   console.log( $(this ).text() );
 });
   $('#doctorSearch').submit(function(event) {
     event.preventDefault();
+
     let inputName = $('#inputName').val();
     let inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
@@ -116,6 +116,8 @@ $('#specialty-list').click(function() {
     $("#doctor-list").last().on('click', '.doctors', function() {
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
+
+       $('#doctor-list').remove();
     });
   });
 });
