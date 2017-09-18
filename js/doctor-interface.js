@@ -4,12 +4,13 @@ import {
   BetterDoctor
 } from './../js/doctor.js';
 
-const moment = require('moment');
+$(document).ready(function() {
 
-$(document).ready(function () {
-  let displayResults = function (doctors) {
-    doctors.forEach(function (doctor) {
+  let displayResults = function(doctors) {
 
+  let isDoctorFound =false;
+    doctors.forEach(function(doctor) {
+      isDoctorFound = true;
       $('#doctor-list').append(` <span class="doctors">
         </br>
         <b>Title:</b> ${doctor.profile.title} </br>
@@ -33,11 +34,18 @@ $(document).ready(function () {
       } else {
         $('#doctor-list').append(` <b>City:</b> <span class="doctors"> City is unavailable</span></br>`);
       }
+      //display if doctor accepts accepts_new_patients
+      if (doctor.practices[0] != null && doctor.practices[0].accepts_new_patients != null) {
+        $('#doctor-list').append(`
+            <b>Accepting New Patients:</b> Yes </span> </br>`);
+      } else {
+        $('#doctor-list').append(` <b>Accepting New Patients:</b> No </span> </br>`);
+      }
       // display doctor phones
 
       if (doctor.practices[0] != null && doctor.practices[0].phones != null) {
 
-        doctor.practices[0].phones.forEach(function (phone) {
+        doctor.practices[0].phones.forEach(function(phone) {
           $('#doctor-list').append(`
       <b>Phone # ${phone.type} :</b> ${phone.number}</span> </br>`);
         })
@@ -52,7 +60,7 @@ $(document).ready(function () {
       // display doctor website
       if (doctor.practices[0] != null) {
         let isWebSiteAvailable = false;
-        doctor.practices.forEach(function (practice) {
+        doctor.practices.forEach(function(practice) {
           if (practice.website != null) {
             $('#doctor-list').append(`
         <b>website :</b> ${practice.website}</span> </br>`);
@@ -66,17 +74,46 @@ $(document).ready(function () {
         $('#doctor-list').append(`</br>`);
       }
     });
+
+  if(!isDoctorFound) {
+      $('#doctor-list').append(`<li> <span> No doctors meet the criteria</span> </li>`);
+  }
   };
 
-  $('#doctorSearch').submit(function (event) {
+  let displaySpecialyst = function(specialysts) {
+
+      specialysts.forEach(function(specialyst) {
+    $('#specialty-list').append(`<li class='selected' id=${specialyst.uid}><a href="#">
+    ${specialyst.specialyst_name}</li> </br></br>`)
+  });
+
+  };
+
+$('#specialty-list').click(function() {
+
+  var id = $('#specialty-list li.selected').attr('id');
+  
+  let betterDoctor = new BetterDoctor(null, null, id);
+  betterDoctor.getDoctorsBySpecialties(displayResults);
+  console.log( $(this ).text() );
+});
+  $('#doctorSearch').submit(function(event) {
     event.preventDefault();
     let inputName = $('#inputName').val();
+    let inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
-    let inputMedicalIssue = $('#med-issue');
-    $('#med-issue').val("");
-    let betterDoctor = new BetterDoctor(inputName);
-    betterDoctor.getDoctors(displayResults);
-    $("#doctor-list").last().on('click', '.doctors', function () {
+    $('#inputCondition').val("");
+    let betterDoctor = new BetterDoctor(inputName, inputCondition);
+
+    if (inputName != null && inputName.length > 0) {
+      betterDoctor.getDoctors(displayResults);
+    } else if (inputCondition != null && inputCondition.length > 0)  {
+      betterDoctor.getSpecialties(displaySpecialyst);
+    }
+    else{
+      $('#doctor-list').append(` <span> Invalid input! </span>`);
+    }
+    $("#doctor-list").last().on('click', '.doctors', function() {
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
     });
