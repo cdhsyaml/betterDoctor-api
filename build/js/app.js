@@ -191,17 +191,22 @@ $(document).ready(function () {
   $('#specialty-list').click(function () {
 
     var id = $('#specialty-list li.selected').attr('id');
-
+    alert(id);
+    alert($('ul#specialty-list > li.selected a').text());
     var betterDoctor = new _doctor.BetterDoctor(null, null, id);
     betterDoctor.getDoctorsBySpecialties(displayResults);
     console.log($(this).text());
   });
   $('#doctorSearch').submit(function (event) {
+
     event.preventDefault();
+
     var inputName = $('#inputName').val();
     var inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
     $('#inputCondition').val("");
+    $("#specialty-list li").remove();
+    $("#doctor-list li").remove();
     var betterDoctor = new _doctor.BetterDoctor(inputName, inputCondition);
 
     if (inputName != null && inputName.length > 0) {

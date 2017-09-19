@@ -92,17 +92,22 @@ $(document).ready(function() {
 $('#specialty-list').click(function() {
 
   var id = $('#specialty-list li.selected').attr('id');
-  
+alert(id);
+ alert($('ul#specialty-list > li.selected a').text());
   let betterDoctor = new BetterDoctor(null, null, id);
   betterDoctor.getDoctorsBySpecialties(displayResults);
   console.log( $(this ).text() );
 });
   $('#doctorSearch').submit(function(event) {
+
     event.preventDefault();
+
     let inputName = $('#inputName').val();
     let inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
     $('#inputCondition').val("");
+    $("#specialty-list li").remove();
+    $("#doctor-list li").remove();
     let betterDoctor = new BetterDoctor(inputName, inputCondition);
 
     if (inputName != null && inputName.length > 0) {
