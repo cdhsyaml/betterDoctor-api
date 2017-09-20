@@ -191,8 +191,8 @@ $(document).ready(function () {
   $('#specialty-list').click(function () {
 
     var id = $('#specialty-list li.selected').attr('id');
-    alert(id);
-    alert($('ul#specialty-list > li.selected a').text());
+    //alert(id);
+    //alert($('ul#specialty-list > li.selected a').text());
     var betterDoctor = new _doctor.BetterDoctor(null, null, id);
     betterDoctor.getDoctorsBySpecialties(displayResults);
     console.log($(this).text());
@@ -200,13 +200,13 @@ $(document).ready(function () {
   $('#doctorSearch').submit(function (event) {
 
     event.preventDefault();
-
+    $("#specialty-list").empty();
+    $('#doctor-list').empty();
     var inputName = $('#inputName').val();
     var inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
     $('#inputCondition').val("");
-    $("#specialty-list li").remove();
-    $("#doctor-list li").remove();
+
     var betterDoctor = new _doctor.BetterDoctor(inputName, inputCondition);
 
     if (inputName != null && inputName.length > 0) {
