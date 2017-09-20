@@ -20,7 +20,7 @@ $(document).ready(function() {
       //display doctor description
       if (doctor.specialties[0] != null && doctor.specialties[0].description != null) {
         $('#doctor-list').append(`
-        <b>Description:</b> ${doctor.specialties[0].description}</br>`)
+        <b>Description:</b> ${doctor.specialties[0].description}</br>`);
 
       } else {
         $('#doctor-list').append(` <b>Description:</b> Description is unavailable`);
@@ -42,7 +42,6 @@ $(document).ready(function() {
         $('#doctor-list').append(` <b>Accepting New Patients:</b> No </span> </br>`);
       }
       // display doctor phones
-
       if (doctor.practices[0] != null && doctor.practices[0].phones != null) {
 
         doctor.practices[0].phones.forEach(function(phone) {
@@ -92,8 +91,12 @@ $(document).ready(function() {
 $('#specialty-list').click(function() {
 
   var id = $('#specialty-list li.selected').attr('id');
+<<<<<<< HEAD
   //alert(id);
  //alert($('ul#specialty-list > li.selected a').text());
+=======
+
+>>>>>>> 4bcdb18ad6edc255bdd2f1261cf415c44948814b
   let betterDoctor = new BetterDoctor(null, null, id);
   betterDoctor.getDoctorsBySpecialties(displayResults);
   console.log( $(this ).text() );
@@ -101,9 +104,14 @@ $('#specialty-list').click(function() {
   $('#doctorSearch').submit(function(event) {
 
     event.preventDefault();
+<<<<<<< HEAD
     $("#specialty-list").empty();
     $( '#doctor-list' ).empty();
       let inputName = $('#inputName').val();
+=======
+
+    let inputName = $('#inputName').val();
+>>>>>>> 4bcdb18ad6edc255bdd2f1261cf415c44948814b
     let inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
     $('#inputCondition').val("");
@@ -121,6 +129,8 @@ $('#specialty-list').click(function() {
     $("#doctor-list").last().on('click', '.doctors', function() {
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
+
+       $('#doctor-list').remove();
     });
   });
 

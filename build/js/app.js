@@ -149,7 +149,6 @@ $(document).ready(function () {
         $('#doctor-list').append(' <b>Accepting New Patients:</b> No </span> </br>');
       }
       // display doctor phones
-
       if (doctor.practices[0] != null && doctor.practices[0].phones != null) {
 
         doctor.practices[0].phones.forEach(function (phone) {
@@ -200,8 +199,12 @@ $(document).ready(function () {
   $('#doctorSearch').submit(function (event) {
 
     event.preventDefault();
+<<<<<<< HEAD
     $("#specialty-list").empty();
     $('#doctor-list').empty();
+=======
+
+>>>>>>> 4bcdb18ad6edc255bdd2f1261cf415c44948814b
     var inputName = $('#inputName').val();
     var inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
@@ -219,6 +222,8 @@ $(document).ready(function () {
     $("#doctor-list").last().on('click', '.doctors', function () {
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
+
+      $('#doctor-list').remove();
     });
   });
 });

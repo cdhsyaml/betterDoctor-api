@@ -1,12 +1,12 @@
 {
-  "name": "BetterDoctor API-project",
-  "description": "BetterDoctor-api is an application  users may enter a medical issue (ie: “sore throat” etc.) into a form, submit it, and receive a list of doctors in your city (e.g. Portland)",
+  "name": "doctor",
+  "description": "better doctor api is an application  users may enter a medical issue",
   "main": "gulpfile.js",
   "authors": [
     "shyamal"
   ],
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://github.com/shyamalpunekar/betterDoctor-api",
   "ignore": [
     "**/.*",
     "node_modules",
