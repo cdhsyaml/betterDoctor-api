@@ -58,7 +58,7 @@ export class BetterDoctor {
   getDoctorsBySpecialties(filterSpecialties) {
     let filteredDoctors;
     if (this.specialty != null) {
-      let url = `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=${this.specialty}&location=45.55%2C-122.63%2C10&user_location=45.55%2C-122.63&skip=0&limit=20&user_key=4aac0a8c2cfc49f5ff9a9ada39850603`;
+      let url = `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=${this.specialty}&location=45.55%2C-122.63%2C10&user_location=47.6095%2C-122.32793&skip=0&limit=20&user_key=4aac0a8c2cfc49f5ff9a9ada39850603`;
       $.get(url).then((data) => {
           filteredDoctors = this.filterDoctorData(data);
           filterSpecialties(filteredDoctors);

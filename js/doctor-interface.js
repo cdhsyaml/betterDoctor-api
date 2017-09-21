@@ -82,10 +82,16 @@ $(document).ready(function() {
 
   let displaySpecialyst = function(specialysts) {
 
+      let isSpecialysts =false
       specialysts.forEach(function(specialyst) {
     $('#specialty-list').append(`<li class='selected' id=${specialyst.uid}><a href="#">
     ${specialyst.specialyst_name}</li> </br></br>`)
+    isSpecialysts = true;
   });
+  if(!isSpecialysts) {
+      $('#doctor-list').append(`<li> <span> No specialyst meet the criteria</span> </li>`);
+  }
+
 
   };
 
@@ -98,6 +104,7 @@ $('#specialty-list').click(function() {
   betterDoctor.getDoctorsBySpecialties(displayResults);
   console.log( $(this ).text() );
 });
+
   $('#doctorSearch').submit(function(event) {
 
     event.preventDefault();

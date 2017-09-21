@@ -1,6 +1,6 @@
 {
   "name": "doctor",
-  "description": "better doctor api is an application  users may enter a medical issue",
+  "description": "better doctor api",
   "main": "gulpfile.js",
   "authors": [
     "shyamal"

@@ -82,7 +82,7 @@ var BetterDoctor = exports.BetterDoctor = function () {
 
       var filteredDoctors = void 0;
       if (this.specialty != null) {
-        var url = "https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=" + this.specialty + "&location=45.55%2C-122.63%2C10&user_location=45.55%2C-122.63&skip=0&limit=20&user_key=4aac0a8c2cfc49f5ff9a9ada39850603";
+        var url = "https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=" + this.specialty + "&location=45.55%2C-122.63%2C10&user_location=47.6095%2C-122.32793&skip=0&limit=20&user_key=4aac0a8c2cfc49f5ff9a9ada39850603";
         $.get(url).then(function (data) {
           filteredDoctors = _this3.filterDoctorData(data);
           filterSpecialties(filteredDoctors);
@@ -149,6 +149,7 @@ $(document).ready(function () {
         $('#doctor-list').append(' <b>Accepting New Patients:</b> No </span> </br>');
       }
       // display doctor phones
+
       if (doctor.practices[0] != null && doctor.practices[0].phones != null) {
 
         doctor.practices[0].phones.forEach(function (phone) {
@@ -182,9 +183,14 @@ $(document).ready(function () {
 
   var displaySpecialyst = function displaySpecialyst(specialysts) {
 
+    var isSpecialysts = false;
     specialysts.forEach(function (specialyst) {
       $('#specialty-list').append('<li class=\'selected\' id=' + specialyst.uid + '><a href="#">\n    ' + specialyst.specialyst_name + '</li> </br></br>');
+      isSpecialysts = true;
     });
+    if (!isSpecialysts) {
+      $('#doctor-list').append('<li> <span> No specialyst meet the criteria</span> </li>');
+    }
   };
 
   $('#specialty-list').click(function () {
@@ -196,15 +202,12 @@ $(document).ready(function () {
     betterDoctor.getDoctorsBySpecialties(displayResults);
     console.log($(this).text());
   });
+
   $('#doctorSearch').submit(function (event) {
 
     event.preventDefault();
-<<<<<<< HEAD
     $("#specialty-list").empty();
     $('#doctor-list').empty();
-=======
-
->>>>>>> 4bcdb18ad6edc255bdd2f1261cf415c44948814b
     var inputName = $('#inputName').val();
     var inputCondition = $('#inputCondition').val();
     $('#inputName').val("");
@@ -222,8 +225,6 @@ $(document).ready(function () {
     $("#doctor-list").last().on('click', '.doctors', function () {
       $(".show-doctor").show();
       $(".show-doctor p").text("textone");
-
-      $('#doctor-list').remove();
     });
   });
 });
